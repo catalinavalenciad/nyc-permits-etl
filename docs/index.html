@@ -1,167 +1,135 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8">
+  <title>NYC Building Permits ETL Pipeline</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #222;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 12px 0;
+    }
+    th {
+      background: #f0f0f0;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;NYC Building Permits ETL Pipeline&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 860px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 60px auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0 24px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a1a1a;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h1 { font-size: 2rem; margin-bottom: 4px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h2 { font-size: 1.2rem; color: #444; font-weight: 400; margin-top: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h3 { margin-top: 40px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tag {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #f0f0f0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 3px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 3px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.pipeline {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 32px 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.step {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f8f8;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #e0e0e0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 16px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>min-width: 140px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.step strong { display: block; font-size: 1rem; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.step span { font-size: 0.8rem; color: #666; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.arrow { font-size: 1.4rem; color: #999; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.notebooks { margin-top: 32px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.notebook-link {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 14px 18px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #e0e0e0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #1a1a1a;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background 0.15s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.notebook-link:hover { background: #f8f8f8; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.notebook-link strong { display: block; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.notebook-link span { font-size: 0.85rem; color: #666; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>table { width: 100%; border-collapse: collapse; margin-top: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>th { background: #f0f0f0; padding: 10px 14px; text-align: left; font-size: 0.9rem; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.footer { margin-top: 60px; font-size: 0.85rem; color: #999; border-top: 1px solid #f0f0f0; padding-top: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>a { color: #0066cc; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;NYC Building Permits ETL Pipeline&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;End-to-end data engineering pipeline — NYC Open Data API → PySpark → Snowflake&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="tag"&gt;Python&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="tag"&gt;PySpark&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="tag"&gt;Snowflake&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="tag"&gt;ETL&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="tag"&gt;REST API&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="tag"&gt;Parquet&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Pipeline Architecture&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="pipeline"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Extract&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Socrata API&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="arrow"&gt;→&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Transform&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;PySpark&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="arrow"&gt;→&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Load&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Snowflake&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Overview&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>This pipeline extracts 50,000 NYC building permit records from the NYC Department of Buildings<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>via the Socrata Open Data API, transforms the raw data using Apache PySpark, and loads the<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>cleaned dataset into a Snowflake cloud data warehouse. The project demonstrates a complete<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>data engineering workflow applied to a real-world AEC dataset.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Results&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;table&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;th&gt;Stage&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;th&gt;Input&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;th&gt;Output&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;Extract&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;NYC Open Data API&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;50,000 rows, 20 columns&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;Transform&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;Raw CSV&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;50,000 rows, 24 columns&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;Load&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;Parquet&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;td&gt;50,000 rows in Snowflake&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/table&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Notebooks&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="notebooks"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="notebook-link" href="01_extract.html"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;01 — Extract&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;API connection, data quality assessment, column pruning, raw checkpoint&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="notebook-link" href="02_transform.html"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;02 — Transform&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;PySpark session, schema enforcement, null handling, derived fields, Parquet output&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a class="notebook-link" href="03_load.html"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;03 — Load&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Snowflake connection, table creation, batch load, verification&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;Tech Stack&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;table&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;&lt;th&gt;Layer&lt;/th&gt;&lt;th&gt;Technology&lt;/th&gt;&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;&lt;td&gt;Extraction&lt;/td&gt;&lt;td&gt;Python, Requests, Socrata API&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;&lt;td&gt;Transformation&lt;/td&gt;&lt;td&gt;Apache PySpark 4.1&lt;/td&gt;&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;tr&gt;&lt;td&gt;Loading&lt;/td&gt;&lt;td&gt;Snowflake, snowflake-connector-py</p>
+
+<h1>NYC Building Permits ETL Pipeline</h1>
+<p>
+This project builds a production-style ETL pipeline to extract, transform, and load
+New York City building permit data from the NYC Department of Buildings into a Snowflake
+cloud data warehouse. Using 50,000 records pulled live from the NYC Open Data API, the
+pipeline covers the full data engineering workflow from extraction and schema enforcement
+through transformation and cloud loading.
+</p>
+
+<h2>Business Context</h2>
+<p>
+Construction permit data is a critical operational resource for AEC firms, city planners,
+and real estate analysts. Permit activity signals construction demand across boroughs and
+building types, enabling workforce planning, market analysis, and project forecasting.
+Raw government permit records require significant cleaning and structuring before they
+are analytically useful. This pipeline transforms 50,000 raw NYC DOB permit records into
+a clean, queryable dataset in Snowflake, making permit activity accessible for downstream
+BI and reporting use cases.
+</p>
+
+<h2>Dataset</h2>
+<ul>
+  <li>NYC Department of Buildings — Permit Issuance</li>
+  <li><a href="https://data.cityofnewyork.us/Housing-Development/DOB-Permit-Issuance/ipu4-2q9a">NYC Open Data (Dataset ID: ipu4-2q9a)</a></li>
+  <li>50,000 records pulled via Socrata API</li>
+  <li>60 source columns narrowed to 20 analytically relevant fields</li>
+  <li>Coverage: all five NYC boroughs</li>
+  <li>Includes permit type, job type, filing dates, contractor info, and GIS coordinates</li>
+</ul>
+
+<h2>Pipeline Architecture</h2>
+<p>NYC Open Data API → Extract → PySpark Transform → Snowflake Load</p>
+
+<h2>Methodology</h2>
+<ul>
+  <li><strong>Extract:</strong> API connection via Requests, data quality assessment across 60 columns, column pruning to 20 fields, raw CSV checkpoint saved prior to transformation</li>
+  <li><strong>Transform:</strong> PySpark schema enforcement, snake_case column standardization, <code>try_to_timestamp</code> applied to handle inconsistent government date formats, null replacement with typed defaults, derived fields added: <code>permit_year</code>, <code>permit_month</code>, <code>days_to_expiration</code>, <code>is_residential</code>, output saved as Parquet</li>
+  <li><strong>Load:</strong> Snowflake connection via environment variables, <code>NYC_PERMITS.PUBLIC.BUILDING_PERMITS</code> table created, 50,000 rows loaded via <code>write_pandas</code>, row count verified post-load</li>
+</ul>
+
+<h2>Key Engineering Decisions</h2>
+<ul>
+  <li>Parquet checkpointing between transform and load stages preserves data integrity and enables reprocessing without re-calling the API</li>
+  <li>Environment variables via <code>.env</code> keep credentials out of source control</li>
+  <li><code>try_to_timestamp</code> used over strict casting to handle inconsistent date formats in government data</li>
+  <li>Column pruning from 60 to 20 source columns reduces processing overhead and improves downstream usability</li>
+  <li>Pipeline structured for Airflow orchestration in a production deployment</li>
+</ul>
+
+<h2>Tech Stack</h2>
+<ul>
+  <li>Language: Python 3.13</li>
+  <li>Processing: Apache PySpark 4.1 (local mode)</li>
+  <li>Warehouse: Snowflake</li>
+  <li>Key libraries: pyspark, snowflake-connector-python, pandas, requests, python-dotenv</li>
+  <li>Version Control: Git, GitHub</li>
+</ul>
+
+<h2>Results</h2>
+<table>
+  <tr><th>Stage</th><th>Input</th><th>Output</th></tr>
+  <tr><td>Extract</td><td>NYC Open Data API</td><td>50,000 rows, 20 columns</td></tr>
+  <tr><td>Transform</td><td>Raw CSV</td><td>50,000 rows, 24 columns (4 derived)</td></tr>
+  <tr><td>Load</td><td>Parquet</td><td>50,000 rows in Snowflake</td></tr>
+</table>
+<ul>
+  <li>Full pipeline executes in under 10 minutes on a local machine</li>
+  <li>All 50,000 records successfully loaded and verified in Snowflake</li>
+</ul>
+
+<h2>Pipeline Notebooks</h2>
+<ul>
+  <li><a href="01_extract.html">01 — Extract</a>: API connection, data quality assessment, column pruning, raw checkpoint</li>
+  <li><a href="02_transform.html">02 — Transform</a>: PySpark session, schema enforcement, null handling, derived fields, Parquet output</li>
+  <li><a href="03_load.html">03 — Load</a>: Snowflake connection, table creation, batch load, verification</li>
+</ul>
+
+<h2>Source Code & Documentation</h2>
+<p>
+Full methodology, Python code, and reproducibility details are available in the
+<a href="https://github.com/catalinavalenciad/nyc-permits-etl">GitHub repository</a>.
+</p>
+<hr>
+<p>
+<strong>Author:</strong> Catalina Valencia<br>
+<a href="https://www.linkedin.com/in/catalina-valencia/">LinkedIn</a>
+</p>
+
 </body>
 </html>
