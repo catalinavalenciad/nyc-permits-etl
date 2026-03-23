@@ -81,9 +81,16 @@ nyc-permits-etl/
 │   ├── 01_extract.ipynb
 │   ├── 02_transform.ipynb
 │   └── 03_load.ipynb
+├── src/
+│   ├── extract.py
+│   ├── transform.py
+│   └── load.py
+├── docs/
+│   ├── index.html
+│   ├── 01_extract.html
+│   ├── 02_transform.html
+│   └── 03_load.html
 ├── data/
-│   ├── raw_permits.csv
-│   └── cleaned_permits.parquet
 ├── .gitignore
 └── README.md
 ```
